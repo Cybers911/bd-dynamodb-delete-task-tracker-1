@@ -18,6 +18,12 @@ public class TaskDAO {
      */
     public void deleteTask(Task task) {
         //TODO: Implement functionality to delete the task that's passed in
+        if (task.getJobId() == null || task.getJobId().isEmpty()) {
+            throw new IllegalArgumentException("Task must have a job ID to be deleted." +
+                    " Partition key cannot be null or empty. " +
+                    " Partition key: " + task.getJobId() + "  Item: " + task);
+        }
+        mapper.delete(task);
     }
 
     /**
